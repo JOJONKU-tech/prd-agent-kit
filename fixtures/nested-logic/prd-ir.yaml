@@ -1,0 +1,50 @@
+schema_version: "1.0"
+document:
+  document_id: PRD-NESTED-001
+  title: Configure conditional event fields
+  domain: demo-events
+  version: "1.0"
+  status: ready_for_review
+  profile_ref: nested-logic
+sources:
+  - SRC-DEMO
+sections:
+  - block_id: BLOCK-NESTED-BACKGROUND
+    type: paragraph
+    text: Conditional fields are needed for one event configuration flow.
+    status: confirmed
+    source_refs:
+      - SRC-DEMO
+requirements:
+  - requirement_id: REQ-NESTED-001
+    sequence: 1
+    module: Event configuration
+    title: Conditional field configuration
+    status: confirmed
+    prototype_asset_refs: []
+    logic:
+      - logic_id: LOGIC-NESTED-1
+        kind: added_content
+        text: Add a conditional field configuration group.
+        status: confirmed
+        source_refs:
+          - SRC-DEMO
+        children:
+          - logic_id: LOGIC-NESTED-2
+            kind: branch
+            text: When the event option is enabled, show the configuration group.
+            status: confirmed
+            source_refs:
+              - SRC-DEMO
+            children:
+              - logic_id: LOGIC-NESTED-3
+                kind: validation
+                text: Require a value before the configuration can be saved.
+                status: confirmed
+                source_refs:
+                  - SRC-DEMO
+                children: []
+    source_refs:
+      - SRC-DEMO
+assets: []
+open_questions: []

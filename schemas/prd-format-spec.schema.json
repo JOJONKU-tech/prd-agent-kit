@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prd-agent-kit.dev/schemas/prd-format-spec.schema.json",
+  "title": "PRD Format Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "name", "status", "extends", "content", "writing", "presentation", "capabilities", "renderer_overrides", "custom_logic_kinds", "source_refs"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "profile_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "name": {"type": "string", "minLength": 1},
+    "status": {"enum": ["provisional", "confirmed", "deprecated"]},
+    "extends": {"type": ["string", "null"]},
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_sections", "optional_sections", "requirements_section"],
+      "properties": {
+        "required_sections": {"type": "array", "items": {"$ref": "#/$defs/section"}, "uniqueItems": true},
+        "optional_sections": {"type": "array", "items": {"$ref": "#/$defs/section"}, "uniqueItems": true},
+        "requirements_section": {"type": "string", "minLength": 1}
+      }
+    },
+    "writing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["language", "tone", "logic_labels", "unknown_marker"],
+      "properties": {
+        "language": {"type": "string", "minLength": 1},
+        "tone": {"type": "string", "minLength": 1},
+        "logic_labels": {"type": "object", "additionalProperties": {"type": "string", "minLength": 1}},
+        "unknown_marker": {"type": "string", "minLength": 1}
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requirements_table", "logic_numbering", "image_policy"],
+      "properties": {
+        "requirements_table": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["importance", "columns"],
+          "properties": {
+            "importance": {"enum": ["required", "preferred"]},
+            "columns": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+          }
+        },
+        "logic_numbering": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["max_depth", "formats", "restart_per_requirement"],
+          "properties": {
+            "max_depth": {"const": 3},
+            "formats": {"type": "array", "prefixItems": [{"const": "decimal"}, {"const": "lowerLetter"}, {"const": "lowerRoman"}], "items": false},
+            "restart_per_requirement": {"type": "boolean"}
+          }
+        },
+        "image_policy": {"enum": ["optional", "required_when_referenced", "required"]}
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "preferred"],
+      "properties": {
+        "required": {"type": "array", "items": {"$ref": "#/$defs/capability"}, "uniqueItems": true},
+        "preferred": {"type": "array", "items": {"$ref": "#/$defs/capability"}, "uniqueItems": true}
+      }
+    },
+    "renderer_overrides": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "markdown": {"type": "object"},
+        "docx": {"type": "object"},
+        "feishu": {"type": "object"}
+      }
+    },
+    "custom_logic_kinds": {"type": "array", "items": {"$ref": "#/$defs/customKind"}},
+    "source_refs": {"type": "array", "items": {"type": "string", "pattern": "^SRC-[A-Za-z0-9._-]+$"}, "uniqueItems": true}
+  },
+  "$defs": {
+    "section": {"type": "string", "pattern": "^[a-z][a-z0-9._-]*$"},
+    "capability": {"type": "string", "pattern": "^[a-z][a-z0-9._-]*$"},
+    "customKind": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "label", "description", "high_risk"],
+      "properties": {
+        "kind": {"type": "string", "pattern": "^x-[a-z0-9][a-z0-9-]*$"},
+        "label": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "high_risk": {"type": "boolean"},
+        "required_when": {"type": "string"}
+      }
+    }
+  }
+}

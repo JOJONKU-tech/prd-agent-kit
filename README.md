@@ -51,6 +51,7 @@ Agent的第一步应该是读取你提供的业务资料，而不是发一张二
 ## 文档
 
 - [完整架构与实施计划](docs/architecture.md)
+- [模板学习](docs/template-learning.md)
 - [英文简介](README.en.md)
 - [Agent入口](AGENTS.md)
 - [兼容状态](compatibility.yaml)
@@ -64,6 +65,10 @@ python3 -m venv .venv
 .venv/bin/python validators/validate_router.py \
   templates/knowledge-base/_meta/router.yaml \
   --kb-root templates/knowledge-base
+.venv/bin/python validators/validate_prd_ir.py \
+  fixtures/simple-prd/prd-ir.yaml \
+  --profile fixtures/simple-prd/format-profile.yaml \
+  --assets-root fixtures/simple-prd
 ```
 
 ## LLM Wiki来源

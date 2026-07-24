@@ -1,0 +1,36 @@
+schema_version: "1.0"
+document:
+  document_id: PRD-DEMO-001
+  title: Add a configurable event option
+  domain: demo-events
+  version: "1.0"
+  status: draft
+  profile_ref: simple-prd
+sources:
+  - SRC-DEMO
+sections:
+  - block_id: BLOCK-BACKGROUND
+    type: paragraph
+    text: The current configuration does not support the new event option.
+    status: confirmed
+    source_refs:
+      - SRC-DEMO
+requirements:
+  - requirement_id: REQ-001
+    sequence: 1
+    module: Event configuration
+    title: Add event option
+    status: confirmed
+    prototype_asset_refs: []
+    logic:
+      - logic_id: LOGIC-001
+        kind: added_content
+        text: Add a new option to the event configuration area.
+        status: confirmed
+        source_refs:
+          - SRC-DEMO
+        children: []
+    source_refs:
+      - SRC-DEMO
+assets: []
+open_questions: []

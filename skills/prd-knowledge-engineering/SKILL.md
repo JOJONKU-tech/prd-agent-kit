@@ -30,6 +30,8 @@ Local operational summaries are available at:
 - `references/onboarding.md`
 - `references/source-priority.md`
 - `references/confirmation-gates.md`
+- `references/template-learning.md`
+- `references/prd-ir.md`
 
 ## Workflow
 

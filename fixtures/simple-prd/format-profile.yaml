@@ -1,0 +1,62 @@
+schema_version: "1.0"
+profile_id: simple-prd
+name: Simple PRD
+status: confirmed
+extends: null
+content:
+  required_sections:
+    - background
+    - requirements
+  optional_sections:
+    - goals
+    - non_goals
+  requirements_section: requirements
+writing:
+  language: en-US
+  tone: concise
+  logic_labels:
+    added_content: Added content
+    trigger: Trigger
+    field_source: Field source
+    display_rule: Display rule
+    interaction_rule: Interaction rule
+    branch: Branch
+    validation: Validation
+    permission: Permission
+    boundary: Boundary
+    metric_formula: Metric formula
+    default_value: Default value
+    data_migration: Data migration
+    system_boundary: System boundary
+  unknown_marker: Unknown
+presentation:
+  requirements_table:
+    importance: preferred
+    columns:
+      - sequence
+      - module
+      - prototype
+      - logic
+  logic_numbering:
+    max_depth: 3
+    formats:
+      - decimal
+      - lowerLetter
+      - lowerRoman
+    restart_per_requirement: true
+  image_policy: required_when_referenced
+capabilities:
+  required:
+    - heading_hierarchy
+    - native_ordered_lists
+  preferred:
+    - requirements_table
+    - images
+renderer_overrides:
+  markdown:
+    mode: portable
+  docx: {}
+  feishu: {}
+custom_logic_kinds: []
+source_refs:
+  - SRC-DEMO
