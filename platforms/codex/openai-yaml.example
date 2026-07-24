@@ -1,0 +1,4 @@
+interface:
+  display_name: "Domain PRD"
+  short_description: "Generate source-grounded PRDs for one business domain"
+  default_prompt: "Read the Canonical Skill and follow its knowledge routing and confirmation gates."

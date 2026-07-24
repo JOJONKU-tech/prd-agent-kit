@@ -1,0 +1,13 @@
+schema_version: "1.0"
+managed_by: prd-agent-kit
+adapter_version: "1.0"
+canonical_skill:
+  path: /absolute/path/to/prd-knowledge-base/domains/example/skills/domain-prd/SKILL.md
+  sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+installation:
+  mode: wrapper
+  scope: user
+  runtime: claude-code
+  installed_path: /absolute/path/to/runtime/skills/example-prd/SKILL.md
+  installed_at: "2026-07-24T10:00:00Z"
+  verified_at: null
