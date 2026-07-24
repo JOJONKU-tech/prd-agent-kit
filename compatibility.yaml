@@ -1,0 +1,17 @@
+schema_version: "1.0"
+runtimes:
+  claude-code:
+    instruction_entry: designed
+    skill_discovery: designed
+    mcp_setup: planned
+    e2e: not_run
+  codex:
+    instruction_entry: designed
+    skill_discovery: designed
+    mcp_setup: planned
+    e2e: not_run
+  hermes:
+    instruction_entry: designed
+    skill_discovery: designed
+    mcp_setup: planned
+    e2e: not_run

@@ -1,0 +1,24 @@
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Local outputs and credentials
+prd-output/
+.env
+.env.*
+*.secret
+*.token
+
+# Local user knowledge bases
+prd-knowledge-base/
+
+# Temporary artifacts
+.tmp/
+tmp/
