@@ -39,6 +39,8 @@ Before executing a full workflow, read:
 
 ```text
 S0 Environment discovery
+   ├─ S0a Agent runtime & capabilities
+   └─ S0b Knowledge-base tool check
 S1 Source intake
 S2 Source audit
 S3 Gap interview
@@ -46,6 +48,22 @@ S4 Gate 1 confirmation
 S5 Knowledge-base and skill creation
 S6 Initialization verification
 ```
+
+### S0b：知识库工具检查
+
+知识库使用标准 Markdown + Wikilink（`[[页面名]]`）组织。Agent 必须确认用户有能浏览、搜索和可视化链接关系图的工具。不满足时，Agent 应主动提出协助配置，不能跳过此步骤继续初始化。
+
+检查顺序：
+
+1. **已有 Obsidian Vault** → 询问用户将知识库放在 vault 内还是独立目录。如果在 vault 内，`[[wikilink]]` 自动可用。
+2. **已装 Obsidian 但无 Vault** → 建议用户在当前工作目录创建 vault，或直接使用 `~/prd-knowledge-base` 作为 vault 根目录。
+3. **未装 Obsidian** → 告诉用户：
+   - Obsidian 免费，官网 https://obsidian.md ，下载即用；
+   - Markdown 文件本身不依赖 Obsidian，用 VS Code、Typora 甚至 Finder 都能看；
+   - 但 `[[链接]]` 的跳转和图谱视图需要 Obsidian 才能发挥完整价值。
+4. **拒绝安装** → 知识库仍可正常创建和读写，Agent 改用显式路径链接（`页面名` → `./路径.md` 格式），放弃 Wikilink 和关系图谱能力。
+
+此步骤必须在 S1 素材接收前完成。工具不到位就进 S1，等于让用户建一个自己没法用的知识库。
 
 ## First initialization message
 
@@ -126,6 +144,7 @@ Ask for explicit confirmation. Without confirmation, do not create the knowledge
 - Use `router.yaml` as the machine source of truth and `index.md` as human navigation.
 - Require page-level sources and rule-level `source_id` for high-risk rules.
 - Propose router changes and wait for confirmation before applying them.
+- Use Obsidian-compatible `[[wikilink]]` syntax for cross-page links. Agent creates links; Obsidian renders the graph. If user has no Obsidian (see S0b), fall back to explicit Markdown paths.
 
 ## PRD generation
 
