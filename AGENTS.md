@@ -51,19 +51,13 @@ S6 Initialization verification
 
 ### S0b：知识库工具检查
 
-知识库使用标准 Markdown + Wikilink（`[[页面名]]`）组织。Agent 必须确认用户有能浏览、搜索和可视化链接关系图的工具。不满足时，Agent 应主动提出协助配置，不能跳过此步骤继续初始化。
+知识库是给 Agent 用的，Agent 直接读写 Markdown 文件、解析 `[[wikilink]]`、遵循 `router.yaml` 路由，不需要任何第三方工具。
 
-检查顺序：
+此步骤只做一件事：如果用户装了 Obsidian，建议将知识库放在 vault 内，这样用户可以借助 Obsidian 的关系图谱浏览 Agent 建好的知识网络。Obsidian 是给人用的，不是给 Agent 用的。
 
-1. **已有 Obsidian Vault** → 询问用户将知识库放在 vault 内还是独立目录。如果在 vault 内，`[[wikilink]]` 自动可用。
-2. **已装 Obsidian 但无 Vault** → 建议用户在当前工作目录创建 vault，或直接使用 `~/prd-knowledge-base` 作为 vault 根目录。
-3. **未装 Obsidian** → 告诉用户：
-   - Obsidian 免费，官网 https://obsidian.md ，下载即用；
-   - Markdown 文件本身不依赖 Obsidian，用 VS Code、Typora 甚至 Finder 都能看；
-   - 但 `[[链接]]` 的跳转和图谱视图需要 Obsidian 才能发挥完整价值。
-4. **拒绝安装** → 知识库仍可正常创建和读写，Agent 改用显式路径链接（`页面名` → `./路径.md` 格式），放弃 Wikilink 和关系图谱能力。
-
-此步骤必须在 S1 素材接收前完成。工具不到位就进 S1，等于让用户建一个自己没法用的知识库。
+- **已有 Obsidian Vault** → 询问用户是否将知识库放在 vault 内。
+- **未装 Obsidian** → 一句话提一下 Obsidian 免费、可以提供可视化图谱，但绝不阻塞流程。
+- **不管装没装** → Agent 继续进入 S1。Agent 自己就是知识库的读写引擎。
 
 ## First initialization message
 
@@ -144,7 +138,7 @@ Ask for explicit confirmation. Without confirmation, do not create the knowledge
 - Use `router.yaml` as the machine source of truth and `index.md` as human navigation.
 - Require page-level sources and rule-level `source_id` for high-risk rules.
 - Propose router changes and wait for confirmation before applying them.
-- Use Obsidian-compatible `[[wikilink]]` syntax for cross-page links. Agent creates links; Obsidian renders the graph. If user has no Obsidian (see S0b), fall back to explicit Markdown paths.
+- Use Obsidian-compatible `[[wikilink]]` syntax for cross-page links. Agent reads these directly; Obsidian is optional for human browsing.
 
 ## PRD generation
 

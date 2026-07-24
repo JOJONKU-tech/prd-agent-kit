@@ -31,14 +31,11 @@ S0 分两步，顺序执行：
 
 ### S0b：知识库工具检查
 
-知识库使用 Markdown + Wikilink（`[[页面名]]`）组织。Agent 必须确认用户有能浏览和可视化链接关系的工具：
+知识库是给 Agent 用的，Agent 直接读写 Markdown、解析 `[[wikilink]]`、遵循 `router.yaml`，不需要第三方工具。Obsidian 只是给人浏览用的。
 
-1. **已有 Obsidian Vault** → 询问用户将知识库放在 vault 内还是独立目录。
-2. **已装 Obsidian 但无 Vault** → 建议用 `~/prd-knowledge-base` 作为 vault 根目录。
-3. **未装 Obsidian** → 说明 Obsidian 免费、不装也能用 Markdown，但 `[[链接]]` 跳转和图谱需要 Obsidian。询问是否安装。
-4. **拒绝安装** → 改用显式路径链接（`页面名` → `./路径.md` 格式），放弃 Wikilink 和图谱能力。
-
-工具不到位不得进入 S1。
+- **已有 Obsidian Vault** → 询问是否将知识库放在 vault 内。
+- **未装 Obsidian** → 提一句 Obsidian 免费可装，但不阻塞。
+- **不管装没装** → 直接进入 S1。
 
 ## S1：素材接收
 
