@@ -1,0 +1,26 @@
+schema_version: "1.0"
+publish_id: PUB-NOVA-RELAY-001
+status: published_unverified
+operation:
+  requested: create
+  executed: create
+  reason: Simulated end-to-end example; no real MCP call was made.
+document:
+  id: simulated-nova-relay-document
+  title: Nova Relay Ladder PRD
+  url: https://docs.example.test/doc/simulated-nova-relay-document
+input:
+  prd_ir_sha256: aca2fecb37fd4ac374bdde30309b1f7f17267dc150eae9221f6d4d2bbd545626
+  render_manifest_sha256: a0138ecc5883058c921a11c4b8563aecedfef0290f0792b7ccdae8a559d49312
+  publish_plan_sha256: f3239dbbfcd4f0f3d5ebbace0803bc3fbeae920aab0ab937e23854f69e95ec6d
+verification:
+  strategy: user_confirmation
+  result: not_run
+  checked:
+    headings: not_run
+    requirements: not_run
+    lists: not_run
+    assets: not_run
+created_at: "2026-07-24T10:10:00Z"
+verified_at: null
+errors: []

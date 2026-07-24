@@ -1,0 +1,13 @@
+schema_version: "1.0"
+domain:
+  slug: nova-events
+  name: Nova Events
+  status: confirmed
+  description: Configuration and publishing of fictional community event templates.
+  owners:
+    - Event Operations
+  default_format_profile: nova-feature-prd
+  sources:
+    - SRC-NOVA-BRIEF
+    - SRC-NOVA-SYSTEM
+    - SRC-NOVA-MEETING

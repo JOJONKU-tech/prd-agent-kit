@@ -1,0 +1,19 @@
+schema_version: "1.0"
+router_type: root
+default_domain: nova-events
+domains:
+  - slug: nova-events
+    name: Nova Events
+    path: domains/nova-events
+    description: Fictional community event configuration domain.
+    aliases:
+      - event admin
+      - event templates
+    keywords:
+      - event
+      - template
+      - relay
+shared:
+  always_read:
+    - _shared/standards/prd-baseline.md
+  routes: []

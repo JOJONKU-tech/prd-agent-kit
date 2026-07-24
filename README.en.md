@@ -19,7 +19,11 @@ Read AGENTS.md and initialize my PRD workflow.
 
 ## Status
 
-The three agent runtimes are design targets. Full end-to-end runtime verification has not yet been completed. See `compatibility.yaml` and the future E2E manuals for the current status.
+The three agent runtimes are design targets. Full end-to-end runtime verification has not yet been completed. See `compatibility.yaml` and `docs/testing/e2e/` for the current status and manual test procedures.
+
+## End-to-end example
+
+See the [fully fictional Nova Event Admin example](examples/nova-event-admin/README.md) for the complete source → knowledge base → Skill → PRD IR → Markdown/DOCX/Block Plan → Gate/Receipt chain.
 
 ## Principles
 

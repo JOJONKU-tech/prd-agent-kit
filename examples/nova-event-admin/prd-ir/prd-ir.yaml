@@ -1,0 +1,114 @@
+schema_version: "1.0"
+document:
+  document_id: PRD-NOVA-RELAY-001
+  title: Add Relay Ladder event format
+  domain: nova-events
+  version: "1.0"
+  status: ready_for_review
+  profile_ref: nova-feature-prd
+sources:
+  - SRC-NOVA-BRIEF
+  - SRC-NOVA-SYSTEM
+  - SRC-NOVA-MEETING
+  - SRC-NOVA-TEMPLATE
+  - SRC-NOVA-PROTOTYPE
+sections:
+  - block_id: BLOCK-NOVA-BACKGROUND
+    type: paragraph
+    text: Nova Event Admin currently supports Solo Sprint and Team Circuit but not checkpoint relay configuration.
+    status: confirmed
+    source_refs:
+      - SRC-NOVA-SYSTEM
+  - block_id: BLOCK-NOVA-GOAL
+    type: paragraph
+    text: Allow operators to configure valid Relay Ladder drafts and allow Event Admins to publish them.
+    status: confirmed
+    source_refs:
+      - SRC-NOVA-BRIEF
+      - SRC-NOVA-MEETING
+  - block_id: BLOCK-NOVA-NONGOAL
+    type: paragraph
+    text: Do not change Solo Sprint or Team Circuit behavior.
+    status: confirmed
+    source_refs:
+      - SRC-NOVA-MEETING
+requirements:
+  - requirement_id: REQ-NOVA-001
+    sequence: 1
+    module: Basic Information
+    title: Relay Ladder configuration
+    status: confirmed
+    prototype_asset_refs:
+      - ASSET-NOVA-PROTOTYPE
+    logic:
+      - logic_id: LOGIC-NOVA-001
+        kind: added_content
+        text: Add Relay Ladder to the Event format choices.
+        status: confirmed
+        source_refs:
+          - SRC-NOVA-MEETING
+        children:
+          - logic_id: LOGIC-NOVA-002
+            kind: trigger
+            text: Show Relay settings when Relay Ladder is selected.
+            status: confirmed
+            source_refs:
+              - SRC-NOVA-MEETING
+            children:
+              - logic_id: LOGIC-NOVA-003
+                kind: field_source
+                text: Team size uses 4–8, checkpoint count uses 3–10, and scoring mode is fixed to Cumulative.
+                status: confirmed
+                source_refs:
+                  - SRC-NOVA-MEETING
+                children: []
+      - logic_id: LOGIC-NOVA-004
+        kind: validation
+        text: Require integer values within both configured ranges before saving a draft.
+        status: confirmed
+        source_refs:
+          - SRC-NOVA-MEETING
+        children: []
+    source_refs:
+      - SRC-NOVA-SYSTEM
+      - SRC-NOVA-MEETING
+      - SRC-NOVA-PROTOTYPE
+  - requirement_id: REQ-NOVA-002
+    sequence: 2
+    module: Draft and Publish
+    title: Save and publish permissions
+    status: confirmed
+    prototype_asset_refs: []
+    logic:
+      - logic_id: LOGIC-NOVA-005
+        kind: trigger
+        text: Enable Save draft only after Relay settings pass validation.
+        status: confirmed
+        source_refs:
+          - SRC-NOVA-MEETING
+        children:
+          - logic_id: LOGIC-NOVA-006
+            kind: permission
+            text: Event Operators may save drafts; only Event Admins may publish.
+            status: confirmed
+            source_refs:
+              - SRC-NOVA-MEETING
+            children: []
+      - logic_id: LOGIC-NOVA-007
+        kind: boundary
+        text: Existing Solo Sprint and Team Circuit behavior remains unchanged.
+        status: confirmed
+        source_refs:
+          - SRC-NOVA-MEETING
+        children: []
+    source_refs:
+      - SRC-NOVA-BRIEF
+      - SRC-NOVA-SYSTEM
+      - SRC-NOVA-MEETING
+assets:
+  - asset_id: ASSET-NOVA-PROTOTYPE
+    type: image
+    source: source-materials/prototype.png
+    alt: Nova Event Admin Relay Ladder configuration prototype
+    status: confirmed
+open_questions: []

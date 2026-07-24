@@ -1,0 +1,61 @@
+schema_version: "1.0"
+document:
+  title: Add Relay Ladder event format
+  layout: requirement_cards
+blocks:
+  - id: BLOCK-NOVA-TITLE
+    type: heading1
+    text: Add Relay Ladder event format
+  - id: BLOCK-NOVA-BACKGROUND-HEADING
+    type: heading2
+    text: Background
+  - id: BLOCK-NOVA-BACKGROUND-TEXT
+    type: paragraph
+    text: Nova Event Admin currently supports Solo Sprint and Team Circuit but not checkpoint relay configuration.
+  - id: BLOCK-NOVA-REQ-001
+    type: heading2
+    text: Basic Information — Relay Ladder configuration
+    requirement_id: REQ-NOVA-001
+  - id: BLOCK-NOVA-IMAGE-001
+    type: image
+    asset_id: ASSET-NOVA-PROTOTYPE
+    source: source-materials/prototype.png
+  - id: BLOCK-NOVA-LOGIC-001
+    type: ordered_list
+    logic_id: LOGIC-NOVA-001
+    depth: 0
+    text: Add Relay Ladder to the Event format choices.
+  - id: BLOCK-NOVA-LOGIC-002
+    type: ordered_list
+    logic_id: LOGIC-NOVA-002
+    depth: 1
+    text: Show Relay settings when Relay Ladder is selected.
+  - id: BLOCK-NOVA-LOGIC-003
+    type: ordered_list
+    logic_id: LOGIC-NOVA-003
+    depth: 2
+    text: Team size uses 4–8, checkpoint count uses 3–10, and scoring mode is fixed to Cumulative.
+  - id: BLOCK-NOVA-LOGIC-004
+    type: ordered_list
+    logic_id: LOGIC-NOVA-004
+    depth: 0
+    text: Require integer values within both configured ranges before saving a draft.
+  - id: BLOCK-NOVA-REQ-002
+    type: heading2
+    text: Draft and Publish — Save and publish permissions
+    requirement_id: REQ-NOVA-002
+  - id: BLOCK-NOVA-LOGIC-005
+    type: ordered_list
+    logic_id: LOGIC-NOVA-005
+    depth: 0
+    text: Enable Save draft only after Relay settings pass validation.
+  - id: BLOCK-NOVA-LOGIC-006
+    type: ordered_list
+    logic_id: LOGIC-NOVA-006
+    depth: 1
+    text: Event Operators may save drafts; only Event Admins may publish.
+  - id: BLOCK-NOVA-LOGIC-007
+    type: ordered_list
+    logic_id: LOGIC-NOVA-007
+    depth: 0
+    text: Existing Solo Sprint and Team Circuit behavior remains unchanged.

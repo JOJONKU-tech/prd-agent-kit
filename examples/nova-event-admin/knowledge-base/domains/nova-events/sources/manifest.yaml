@@ -1,0 +1,59 @@
+schema_version: "1.0"
+source_mode: reference
+sources:
+  - source_id: SRC-NOVA-BRIEF
+    type: business_overview
+    title: Nova Events Business Brief
+    status: confirmed
+    location: ../../../../source-materials/business-brief.md
+    sha256: ac9ccd69afdae7ac9fd349e3b98e57a06d205cda008d2f78098ff42f3a4f48ee
+    captured_at: "2026-07-24T10:00:00Z"
+    source_updated_at: null
+    domains:
+      - nova-events
+    notes: Defines scope, roles, and main process.
+  - source_id: SRC-NOVA-SYSTEM
+    type: system_document
+    title: Nova Event Admin System Guide
+    status: confirmed
+    location: ../../../../source-materials/system-guide.md
+    sha256: ab2dc8f2414db3fb01d9af4715803e2a13fea90b1599148c870ee2f49e331fa3
+    captured_at: "2026-07-24T10:00:00Z"
+    source_updated_at: null
+    domains:
+      - nova-events
+    notes: Defines current fields and system boundary.
+  - source_id: SRC-NOVA-MEETING
+    type: meeting_record
+    title: Relay Ladder Requirement Meeting
+    status: confirmed
+    location: ../../../../source-materials/meeting-notes.md
+    sha256: 8ab61ecef055ff61dc77f7132aeabcfed89586a96062265391d8554deb26de7e
+    captured_at: "2026-07-24T10:00:00Z"
+    source_updated_at: null
+    domains:
+      - nova-events
+    notes: Defines new field values, validation, and permission.
+  - source_id: SRC-NOVA-TEMPLATE
+    type: prd_template
+    title: Nova PRD Format Sample
+    status: confirmed
+    location: ../../../../source-materials/standard-prd.md
+    sha256: dbdbb60502a4ffc601295ff50b167511bf1f4de70df1960131990d25aa8c4c35
+    captured_at: "2026-07-24T10:00:00Z"
+    source_updated_at: null
+    domains:
+      - nova-events
+    notes: Format evidence only.
+  - source_id: SRC-NOVA-PROTOTYPE
+    type: image_asset
+    title: Relay Ladder Prototype
+    status: confirmed
+    location: ../../../../source-materials/prototype.png
+    sha256: 2cf3add3f65d1f951d385376c1e55f692e714b5d5142857ae98a22705710550f
+    captured_at: "2026-07-24T10:00:00Z"
+    source_updated_at: null
+    domains:
+      - nova-events
+    notes: Fictional UI evidence generated from prototype.html.
+conflicts: []

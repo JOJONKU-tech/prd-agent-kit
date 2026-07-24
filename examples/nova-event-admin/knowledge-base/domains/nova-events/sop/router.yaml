@@ -1,0 +1,29 @@
+schema_version: "1.0"
+router_type: domain
+domain: nova-events
+always_read:
+  - business/overview.md
+  - concepts/glossary.md
+routes:
+  - route_id: relay-template-change
+    match:
+      keywords:
+        - relay
+        - event format
+        - template
+      request_types:
+        - feature-prd
+      source_types:
+        - meeting_record
+        - system_document
+    read:
+      required:
+        - systems/event-admin.md
+        - processes/event-configuration.md
+        - standards/prd-format.yaml
+      optional: []
+    rationale: Load current system, process, and format rules for Relay Ladder changes.
+excluded_by_default:
+  - sources/raw/**
+  - templates/**
+  - skills/**

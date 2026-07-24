@@ -7,7 +7,7 @@
 ## 当前状态
 
 - 版本阶段：`0.1.0`协议实现阶段
-- 仓库状态：Private development
+- 仓库状态：Public development
 - License：MIT
 - Claude Code / Codex / Hermes：Designed，尚未完成真实E2E验证
 
@@ -54,6 +54,7 @@ Agent的第一步应该是读取你提供的业务资料，而不是发一张二
 - [模板学习](docs/template-learning.md)
 - [Renderer协议](docs/renderer-protocols.md)
 - [安全发布](docs/publishing.md)
+- [Nova脱敏端到端示例](examples/nova-event-admin/README.md)
 - [英文简介](README.en.md)
 - [Agent入口](AGENTS.md)
 - [兼容状态](compatibility.yaml)

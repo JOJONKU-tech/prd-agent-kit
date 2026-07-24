@@ -1,0 +1,14 @@
+schema_version: "1.0"
+profile_ref: nova-feature-prd
+status: confirmed
+source_refs:
+  - SRC-NOVA-TEMPLATE
+requirements_table:
+  columns:
+    - sequence
+    - module
+    - prototype
+    - logic
+logic_numbering:
+  max_depth: 3
+  restart_per_requirement: true

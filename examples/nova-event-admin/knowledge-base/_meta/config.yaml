@@ -1,0 +1,12 @@
+schema_version: "1.0"
+knowledge_base:
+  name: Nova Event Knowledge Base
+  language: en-US
+  source_mode: reference
+  default_domain: nova-events
+  default_format_profile: nova-feature-prd
+settings:
+  require_gate1_for_writes: true
+  require_gate2_for_publishing: true
+  require_sources: true
+  max_always_read: 3

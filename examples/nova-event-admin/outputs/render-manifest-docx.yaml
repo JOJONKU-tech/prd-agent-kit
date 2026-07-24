@@ -1,0 +1,26 @@
+schema_version: "1.0"
+render_id: RENDER-NOVA-DOCX
+renderer: docx
+input:
+  prd_ir: examples/nova-event-admin/prd-ir/prd-ir.yaml
+  prd_ir_sha256: aca2fecb37fd4ac374bdde30309b1f7f17267dc150eae9221f6d4d2bbd545626
+  format_profile: nova-feature-prd
+  format_spec_sha256: b500b0cf66828fb721c44f0aafed55a43a2e5ef17a0c9a761ca135ba805432b6
+  template_ref: neutral-prd-golden
+capabilities:
+  required:
+    heading_hierarchy: supported
+  preferred:
+    native_ordered_lists: supported
+    requirements_table: supported
+    images: supported
+status: ready_for_publish
+outputs:
+  - path: examples/nova-event-admin/outputs/prd.docx
+    sha256: 82494b07b5c2b7fdc4c2079b88ef65281585a183f88ad2e655f680941c2bce15
+    media_type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+degradations: []
+checks:
+  schema_valid: passed
+  structure_valid: passed
+  visual_valid: passed

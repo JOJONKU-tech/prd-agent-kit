@@ -1,0 +1,58 @@
+schema_version: "1.0"
+publish_id: PUB-NOVA-RELAY-001
+status: awaiting_confirmation
+input:
+  prd_ir: examples/nova-event-admin/prd-ir/prd-ir.yaml
+  prd_ir_sha256: aca2fecb37fd4ac374bdde30309b1f7f17267dc150eae9221f6d4d2bbd545626
+  render_manifest: examples/nova-event-admin/outputs/render-manifest-blocks.yaml
+  render_manifest_sha256: a0138ecc5883058c921a11c4b8563aecedfef0290f0792b7ccdae8a559d49312
+adapter:
+  adapter_ref: examples/document-adapters/feishu.yaml
+  adapter_version: "1.0"
+  verification_status: structure_verified
+operation:
+  requested: create
+  executed: create
+  fallback_reason: null
+target:
+  platform: feishu-example
+  space_id: example-space
+  parent_id: example-folder
+  document_id: null
+  title: Nova Relay Ladder PRD
+renderer:
+  type: feishu_blocks
+  output_ref: examples/nova-event-admin/outputs/block-plan.yaml
+assets:
+  upload_plan_ref: examples/nova-event-admin/source-materials/prototype.png
+  count: 1
+compatibility:
+  required:
+    heading_hierarchy: supported
+  preferred:
+    native_ordered_lists: supported
+    requirements_table: unsupported
+    images: supported
+degradations:
+  - feature: requirements_table
+    reason: Native nested list blocks cannot be preserved inside target table cells.
+    action: Use requirement cards while preserving logic order and depth.
+    severity: preferred
+verification:
+  strategies:
+    - mcp_structure
+    - browser
+  minimum_passes: 1
+side_effects:
+  create_documents: 1
+  update_documents: 0
+  upload_assets: 1
+  delete_documents: 0
+idempotency:
+  key: PUB-NOVA-RELAY-001
+  strategy: query_before_retry
+confirmation:
+  required: true
+  status: pending
+  plan_sha256: null
+  confirmed_at: null

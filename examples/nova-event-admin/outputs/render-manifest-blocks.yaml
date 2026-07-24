@@ -1,0 +1,29 @@
+schema_version: "1.0"
+render_id: RENDER-NOVA-BLOCKS
+renderer: feishu_blocks
+input:
+  prd_ir: examples/nova-event-admin/prd-ir/prd-ir.yaml
+  prd_ir_sha256: aca2fecb37fd4ac374bdde30309b1f7f17267dc150eae9221f6d4d2bbd545626
+  format_profile: nova-feature-prd
+  format_spec_sha256: b500b0cf66828fb721c44f0aafed55a43a2e5ef17a0c9a761ca135ba805432b6
+capabilities:
+  required:
+    heading_hierarchy: supported
+  preferred:
+    native_ordered_lists: supported
+    requirements_table: unsupported
+    images: supported
+status: ready_for_review
+outputs:
+  - path: examples/nova-event-admin/outputs/block-plan.yaml
+    sha256: 08722d93dad850accd3b967af43b230c254057c08dc621e7d8182a49f5751350
+    media_type: application/yaml
+degradations:
+  - feature: requirements_table
+    reason: Native nested list blocks cannot be preserved inside target table cells.
+    action: Use requirement cards while preserving logic order and depth.
+    severity: preferred
+checks:
+  schema_valid: passed
+  structure_valid: passed
+  visual_valid: not_run
