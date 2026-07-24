@@ -21,7 +21,7 @@ Follow the concise [Getting Started guide](docs/getting-started.md). You do not 
 
 ## Status
 
-The repository is currently in private release preparation. The three agent runtimes are design targets. Full end-to-end runtime verification has not yet been completed. See `compatibility.yaml` and `docs/testing/e2e/` for the current status and manual test procedures.
+The repository is public. V1 architecture is complete. The three agent runtimes are design targets. Full end-to-end runtime verification has not yet been completed. See `compatibility.yaml` and `docs/testing/e2e/` for the current status and manual test procedures.
 
 ## End-to-end example
 

@@ -83,14 +83,13 @@ class Phase9ReleaseReadinessTests(unittest.TestCase):
         self.assertIn("V1 Implemented", text)
         self.assertIn("### Phase 9：文档与发布准备", text)
 
-    def test_repository_visibility_claim_is_private_release_preparation(self):
+    def test_repository_visibility_claim_is_public(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         english = (ROOT / "README.en.md").read_text(encoding="utf-8")
         architecture = (ROOT / "docs/architecture.md").read_text(encoding="utf-8")
-        self.assertIn("Private release preparation", readme)
-        self.assertIn("private release preparation", english)
-        self.assertIn("可见性：Private", architecture)
-        self.assertNotIn("Public development", readme)
+        self.assertNotIn("Private release preparation", readme)
+        self.assertNotIn("private release preparation", english)
+        self.assertNotIn("可见性：Private", architecture)
 
     def test_ci_runs_release_check_and_full_tests(self):
         workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")

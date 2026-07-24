@@ -959,7 +959,7 @@ runtimes:
 ## 19. 建仓库决策记录
 
 1. GitHub仓库：`JOJONKU-tech/prd-agent-kit`；
-2. 可见性：Private；
+2. 可见性：Public；
 3. 发布方式：Private环境完成并通过敏感扫描；如需转Public，必须再次执行Release Checklist；
 4. 默认分支：`main`；
 5. 首发目标版本：`0.1.0`，尚未创建公开Tag/Release；
