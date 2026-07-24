@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prd-agent-kit.dev/schemas/render-manifest.schema.json",
+  "title": "Renderer Execution Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "render_id", "renderer", "input", "capabilities", "status", "outputs", "degradations", "checks"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "render_id": {"type": "string", "pattern": "^RENDER-[A-Za-z0-9._-]+$"},
+    "renderer": {"enum": ["markdown", "docx", "feishu_blocks"]},
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prd_ir", "prd_ir_sha256", "format_profile", "format_spec_sha256"],
+      "properties": {
+        "prd_ir": {"type": "string", "minLength": 1},
+        "prd_ir_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "format_profile": {"type": "string", "minLength": 1},
+        "format_spec_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "template_ref": {"type": ["string", "null"]}
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "preferred"],
+      "properties": {
+        "required": {"$ref": "#/$defs/capabilityMap"},
+        "preferred": {"$ref": "#/$defs/capabilityMap"}
+      }
+    },
+    "status": {"enum": ["failed", "rendered", "ready_for_review", "ready_for_publish"]},
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+          "media_type": {"type": "string"}
+        }
+      }
+    },
+    "degradations": {"type": "array", "items": {"$ref": "#/$defs/degradation"}},
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_valid", "structure_valid", "visual_valid"],
+      "properties": {
+        "schema_valid": {"$ref": "#/$defs/checkStatus"},
+        "structure_valid": {"$ref": "#/$defs/checkStatus"},
+        "visual_valid": {"$ref": "#/$defs/checkStatus"}
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "capabilityStatus": {"enum": ["supported", "unsupported", "unavailable", "unknown"]},
+    "capabilityMap": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z][a-z0-9._-]*$"},
+      "additionalProperties": {"$ref": "#/$defs/capabilityStatus"}
+    },
+    "checkStatus": {"enum": ["passed", "failed", "not_run", "unavailable"]},
+    "degradation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["feature", "reason", "action", "severity"],
+      "properties": {
+        "feature": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "action": {"type": "string", "minLength": 1},
+        "severity": {"enum": ["required", "preferred", "expected"]}
+      }
+    }
+  }
+}

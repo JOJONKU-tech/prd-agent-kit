@@ -1,0 +1,29 @@
+schema_version: "1.0"
+render_id: RENDER-SIMPLE-MARKDOWN
+renderer: markdown
+input:
+  prd_ir: fixtures/simple-prd/prd-ir.yaml
+  prd_ir_sha256: 08fc5db032cbdd99515a6804300fe15d30b8c5ad1e6199c8a6ab0d6d7ae520be
+  format_profile: simple-prd
+  format_spec_sha256: 53d86e8898762e4c40cc1e77206bd6c957d7b81cf33b27feef6c4d8b344f66c0
+capabilities:
+  required:
+    heading_hierarchy: supported
+  preferred:
+    native_ordered_lists: unsupported
+    requirements_table: supported
+    images: supported
+status: ready_for_review
+outputs:
+  - path: fixtures/simple-prd/output.md
+    sha256: f49e1b1642e5893840689520dc8129a2511d5f89168da8408caf725cea47e949
+    media_type: text/markdown
+degradations:
+  - feature: native_ordered_lists
+    reason: Portable Markdown tables do not support block-level nested ordered lists.
+    action: Render visible numbering inside the table cell and retain IR logic structure.
+    severity: preferred
+checks:
+  schema_valid: passed
+  structure_valid: passed
+  visual_valid: not_run

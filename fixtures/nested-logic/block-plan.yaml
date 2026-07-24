@@ -1,0 +1,27 @@
+schema_version: "1.0"
+document:
+  title: Configure conditional event fields
+  layout: requirement_cards
+blocks:
+  - id: BLOCK-TITLE
+    type: heading1
+    text: Configure conditional event fields
+  - id: BLOCK-REQ-001
+    type: heading2
+    text: Conditional field configuration
+    requirement_id: REQ-NESTED-001
+  - id: BLOCK-LOGIC-001
+    type: ordered_list
+    logic_id: LOGIC-NESTED-1
+    depth: 0
+    text: Add a conditional field configuration group.
+  - id: BLOCK-LOGIC-002
+    type: ordered_list
+    logic_id: LOGIC-NESTED-2
+    depth: 1
+    text: When the event option is enabled, show the configuration group.
+  - id: BLOCK-LOGIC-003
+    type: ordered_list
+    logic_id: LOGIC-NESTED-3
+    depth: 2
+    text: Require a value before the configuration can be saved.

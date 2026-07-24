@@ -48,8 +48,8 @@ presentation:
 capabilities:
   required:
     - heading_hierarchy
-    - native_ordered_lists
   preferred:
+    - native_ordered_lists
     - requirements_table
     - images
 renderer_overrides:

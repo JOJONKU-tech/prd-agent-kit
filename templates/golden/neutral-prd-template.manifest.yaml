@@ -1,0 +1,36 @@
+schema_version: "1.0"
+template_id: neutral-prd-golden
+template_file: neutral-prd-template.docx
+sha256: c598c8e7336015011767f2a4fce7a8eeed605002ac72fe43969a6a9e1a659bf1
+status: verified
+content_policy:
+  neutral: true
+  contains_business_content: false
+  contains_branding: false
+  contains_real_user_data: false
+capabilities:
+  heading_hierarchy: supported
+  requirements_table: supported
+  native_ordered_lists: supported
+  list_depth_3: supported
+  restart_per_logic_cell: supported
+  independent_num_ids: supported
+structure_checks:
+  zip_valid: passed
+  required_parts: passed
+  numbered_paragraphs: 6
+  logic_cells: 2
+  max_level: 2
+  independent_num_ids: true
+visual_checks:
+  method: macOS Quick Look thumbnail
+  result: passed
+  overlap: none_observed
+  truncation: none_observed
+  mojibake: none_observed
+  native_numbering_visible: true
+generated_with:
+  python_docx: 1.2.0
+verified_on:
+  os: macOS 26.5.2
+  verified_at: "2026-07-24T10:44:01Z"

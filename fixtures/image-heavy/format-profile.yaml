@@ -1,0 +1,7 @@
+schema_version: "1.0"
+profile_id: image-heavy
+name: Image Heavy PRD
+status: confirmed
+extends: ../simple-prd/format-profile.yaml
+presentation:
+  image_policy: required_when_referenced

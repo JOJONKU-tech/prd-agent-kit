@@ -32,6 +32,7 @@ Local operational summaries are available at:
 - `references/confirmation-gates.md`
 - `references/template-learning.md`
 - `references/prd-ir.md`
+- `references/rendering.md`
 
 ## Workflow
 

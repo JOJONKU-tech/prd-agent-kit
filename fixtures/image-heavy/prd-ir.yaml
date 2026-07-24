@@ -1,0 +1,42 @@
+schema_version: "1.0"
+document:
+  document_id: PRD-IMAGE-001
+  title: Show an annotated configuration example
+  domain: demo-events
+  version: "1.0"
+  status: ready_for_review
+  profile_ref: image-heavy
+sources:
+  - SRC-DEMO
+sections:
+  - block_id: BLOCK-IMAGE-BACKGROUND
+    type: paragraph
+    text: The requirement uses a neutral annotated example image.
+    status: confirmed
+    source_refs:
+      - SRC-DEMO
+requirements:
+  - requirement_id: REQ-IMAGE-001
+    sequence: 1
+    module: Event configuration
+    title: Annotated example
+    status: confirmed
+    prototype_asset_refs:
+      - ASSET-NEUTRAL
+    logic:
+      - logic_id: LOGIC-IMAGE-001
+        kind: display_rule
+        text: Place the annotated example below the requirement heading.
+        status: confirmed
+        source_refs:
+          - SRC-DEMO
+        children: []
+    source_refs:
+      - SRC-DEMO
+assets:
+  - asset_id: ASSET-NEUTRAL
+    type: image
+    source: assets/neutral.png
+    alt: Neutral blue square used for asset validation
+    status: confirmed
+open_questions: []

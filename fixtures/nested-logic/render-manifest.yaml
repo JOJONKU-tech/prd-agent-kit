@@ -1,0 +1,29 @@
+schema_version: "1.0"
+render_id: RENDER-NESTED-BLOCKS
+renderer: feishu_blocks
+input:
+  prd_ir: fixtures/nested-logic/prd-ir.yaml
+  prd_ir_sha256: e3d3dc32ce160450b0bf99808b39d9cb2e58c7d8f61fb4a82c4a6aece9694527
+  format_profile: nested-logic
+  format_spec_sha256: f8a70f73f29af6d936c59e599843f53ee8662c992d7098612571c1f998a98bd7
+capabilities:
+  required:
+    heading_hierarchy: supported
+  preferred:
+    native_ordered_lists: supported
+    requirements_table: unsupported
+    images: supported
+status: ready_for_review
+outputs:
+  - path: fixtures/nested-logic/block-plan.yaml
+    sha256: fdb36bcbd4e2eca3288776485e9bf18ec9c982e30c831b18ac689fccbf933948
+    media_type: application/yaml
+degradations:
+  - feature: requirements_table
+    reason: The target Block capability cannot preserve native nested lists inside table cells.
+    action: Use requirement cards while preserving ordered-list Blocks and depth.
+    severity: preferred
+checks:
+  schema_valid: passed
+  structure_valid: passed
+  visual_valid: not_run

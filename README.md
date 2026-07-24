@@ -52,6 +52,7 @@ Agent的第一步应该是读取你提供的业务资料，而不是发一张二
 
 - [完整架构与实施计划](docs/architecture.md)
 - [模板学习](docs/template-learning.md)
+- [Renderer协议](docs/renderer-protocols.md)
 - [英文简介](README.en.md)
 - [Agent入口](AGENTS.md)
 - [兼容状态](compatibility.yaml)

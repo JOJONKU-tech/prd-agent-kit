@@ -1,0 +1,23 @@
+schema_version: "1.0"
+render_id: RENDER-INCOMPATIBLE
+renderer: markdown
+input:
+  prd_ir: fixtures/simple-prd/prd-ir.yaml
+  prd_ir_sha256: 08fc5db032cbdd99515a6804300fe15d30b8c5ad1e6199c8a6ab0d6d7ae520be
+  format_profile: strict-native-list
+  format_spec_sha256: 53d86e8898762e4c40cc1e77206bd6c957d7b81cf33b27feef6c4d8b344f66c0
+capabilities:
+  required:
+    native_ordered_lists: unsupported
+  preferred: {}
+status: failed
+outputs: []
+degradations:
+  - feature: native_ordered_lists
+    reason: The selected target cannot preserve a Required native-list capability.
+    action: Stop rendering and suggest DOCX or native Block output.
+    severity: required
+checks:
+  schema_valid: passed
+  structure_valid: not_run
+  visual_valid: not_run
