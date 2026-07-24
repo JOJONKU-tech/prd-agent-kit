@@ -7,7 +7,7 @@
 ## 当前状态
 
 - 版本阶段：`0.1.0`协议实现阶段
-- 仓库状态：Public development
+- 仓库状态：Private release preparation
 - License：MIT
 - Claude Code / Codex / Hermes：Designed，尚未完成真实E2E验证
 
@@ -23,6 +23,8 @@ cd prd-agent-kit
 ```text
 请阅读AGENTS.md，并初始化我的PRD工作流。
 ```
+
+完整步骤见[Getting Started](docs/getting-started.md)。
 
 Agent的第一步应该是读取你提供的业务资料，而不是发一张二十题问卷。
 
@@ -50,6 +52,12 @@ Agent的第一步应该是读取你提供的业务资料，而不是发一张二
 
 ## 文档
 
+- [Getting Started](docs/getting-started.md)
+- [排障](docs/troubleshooting.md)
+- [发布检查清单](docs/release-checklist.md)
+- [Security](SECURITY.md)
+- [Contributing](CONTRIBUTING.md)
+- [Changelog](CHANGELOG.md)
 - [完整架构与实施计划](docs/architecture.md)
 - [模板学习](docs/template-learning.md)
 - [Renderer协议](docs/renderer-protocols.md)
@@ -61,9 +69,17 @@ Agent的第一步应该是读取你提供的业务资料，而不是发一张二
 
 ## 开发验证
 
+完整发布前检查：
+
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements-dev.txt
+.venv/bin/python validators/release_check.py --run-tests
+```
+
+单项排障：
+
+```bash
 .venv/bin/python -m unittest discover -s tests -v
 .venv/bin/python validators/validate_router.py \
   templates/knowledge-base/_meta/router.yaml \

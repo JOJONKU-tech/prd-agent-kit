@@ -1,6 +1,6 @@
 # prd-agent-kit 完整设计文档与实施清单
 
-> 状态：Design Approved in Conversation / Repository Not Created  
+> 状态：V1 Implemented / Private Release Preparation；真实跨Agent E2E仍为`not_run`
 > 日期：2026-07-24  
 > License：MIT  
 > 文档语言：中文主文档，精简英文入口；Schema字段使用英文
@@ -745,11 +745,11 @@ runtimes:
 
 **目标：** 将本设计文档转入仓库并锁定V1边界。
 
-- [ ] 用户确认本设计文档；
-- [ ] 确认GitHub仓库归属和可见性；
-- [ ] 确认默认分支；
-- [ ] 确认是否立即创建远程仓库；
-- [ ] 确认首发版本号`0.1.0`。
+- [x] 用户确认本设计文档；
+- [x] 确认GitHub仓库归属和可见性；
+- [x] 确认默认分支；
+- [x] 确认是否立即创建远程仓库；
+- [x] 确认首发版本号`0.1.0`。
 
 ### Phase 1：仓库骨架
 
@@ -766,11 +766,11 @@ runtimes:
 
 **验收：**
 
-- [ ] `CLAUDE.md`正确导入`AGENTS.md`；
-- [ ] `AGENTS.md`小于约20KB；
-- [ ] README不宣称已完成E2E；
-- [ ] License为MIT；
-- [ ] 敏感扫描通过。
+- [x] `CLAUDE.md`正确导入`AGENTS.md`；
+- [x] `AGENTS.md`小于约20KB；
+- [x] README不宣称已完成E2E；
+- [x] License为MIT；
+- [x] 敏感扫描通过。
 
 ### Phase 2：初始化协议与核心Skill
 
@@ -784,11 +784,11 @@ runtimes:
 
 **验收：**
 
-- [ ] 第一轮只索取资料；
-- [ ] Gate 1前禁止写盘；
-- [ ] 无资料模式不补假事实；
-- [ ] 核心Skill只用公共字段；
-- [ ] 引用文件路径全部存在。
+- [x] 第一轮只索取资料；
+- [x] Gate 1前禁止写盘；
+- [x] 无资料模式不补假事实；
+- [x] 核心Skill只用公共字段；
+- [x] 引用文件路径全部存在。
 
 ### Phase 3：知识库Schema与Router
 
@@ -804,11 +804,11 @@ runtimes:
 
 **验收：**
 
-- [ ] Root Router和Domain Router样例通过Schema；
-- [ ] `always_read`超过3个时失败；
-- [ ] 指向不存在文件时失败；
-- [ ] 引用raw路径时失败；
-- [ ] 多业务域歧义会要求确认。
+- [x] Root Router和Domain Router样例通过Schema；
+- [x] `always_read`超过3个时失败；
+- [x] 指向不存在文件时失败；
+- [x] 引用raw路径时失败；
+- [x] 多业务域歧义会要求确认。
 
 ### Phase 4：PRD IR与Format Profile
 
@@ -824,13 +824,13 @@ runtimes:
 
 **验收：**
 
-- [ ] 标准Kind通过；
-- [ ] 未注册`x-` Kind失败；
-- [ ] Logic超过3层失败；
-- [ ] 高风险Kind无来源失败；
-- [ ] Asset引用不存在失败；
-- [ ] Blocking问题阻止`confirmed`发布状态；
-- [ ] Profile继承可解析。
+- [x] 标准Kind通过；
+- [x] 未注册`x-` Kind失败；
+- [x] Logic超过3层失败；
+- [x] 高风险Kind无来源失败；
+- [x] Asset引用不存在失败；
+- [x] Blocking问题阻止`confirmed`发布状态；
+- [x] Profile继承可解析。
 
 ### Phase 5：Renderer Protocol与Golden Fixtures
 
@@ -846,12 +846,12 @@ runtimes:
 
 **验收：**
 
-- [ ] 不提供固定Renderer代码；
-- [ ] Markdown降级进入Manifest；
-- [ ] Golden DOCX具备原生多级编号；
-- [ ] 每个DOCX逻辑单元格可从1重新编号；
-- [ ] Block Plan层级与IR一致；
-- [ ] Required能力不足时验证失败。
+- [x] 不提供固定Renderer代码；
+- [x] Markdown降级进入Manifest；
+- [x] Golden DOCX具备原生多级编号；
+- [x] 每个DOCX逻辑单元格可从1重新编号；
+- [x] Block Plan层级与IR一致；
+- [x] Required能力不足时验证失败。
 
 ### Phase 6：发布协议与MCP Adapter
 
@@ -867,12 +867,12 @@ runtimes:
 
 **验收：**
 
-- [ ] Adapter不包含凭据；
-- [ ] 不提供删除/权限/分享能力；
-- [ ] 未通过沙箱时不能正式发布；
-- [ ] Gate 2变化会使确认失效；
-- [ ] 更新读取失败转为V2/V3新建；
-- [ ] Receipt不保存临时签名URL。
+- [x] Adapter不包含凭据；
+- [x] 不提供删除/权限/分享能力；
+- [x] 未通过沙箱时不能正式发布；
+- [x] Gate 2变化会使确认失效；
+- [x] 更新读取失败转为V2/V3新建；
+- [x] Receipt不保存临时签名URL。
 
 ### Phase 7：跨Agent入口
 
@@ -887,12 +887,12 @@ runtimes:
 
 **验收：**
 
-- [ ] Claude使用`CLAUDE.md → @AGENTS.md`；
-- [ ] Codex说明`AGENTS.md`与`.agents/skills`；
-- [ ] Hermes说明项目上下文和Profile Skill目录；
-- [ ] Wrapper可读取Canonical Skill；
-- [ ] 非管理同名Skill不会被覆盖；
-- [ ] Compatibility保持`e2e:not_run`。
+- [x] Claude使用`CLAUDE.md → @AGENTS.md`；
+- [x] Codex说明`AGENTS.md`与`.agents/skills`；
+- [x] Hermes说明项目上下文和Profile Skill目录；
+- [x] Wrapper可读取Canonical Skill；
+- [x] 非管理同名Skill不会被覆盖；
+- [x] Compatibility保持`e2e:not_run`。
 
 ### Phase 8：Nova示例
 
@@ -911,11 +911,11 @@ runtimes:
 
 **验收：**
 
-- [ ] 所有内容从零虚构；
-- [ ] 无真实企业或产品痕迹；
-- [ ] 完整链路可被Agent理解；
-- [ ] 敏感扫描通过；
-- [ ] 图片Metadata清理完成。
+- [x] 所有内容从零虚构；
+- [x] 无真实企业或产品痕迹；
+- [x] 完整链路可被Agent理解；
+- [x] 敏感扫描通过；
+- [x] 图片Metadata清理完成。
 
 ### Phase 9：文档与发布准备
 
@@ -932,14 +932,14 @@ runtimes:
 
 **验收：**
 
-- [ ] 用户能仅凭`AGENTS.md`开始；
-- [ ] README不要求理解全部架构；
-- [ ] 英文README能解释项目和快速开始；
-- [ ] 所有链接有效；
-- [ ] 所有Schema示例通过；
-- [ ] 所有验证脚本通过；
-- [ ] Compatibility声明真实；
-- [ ] MIT License存在。
+- [x] 用户能仅凭`AGENTS.md`开始；
+- [x] README不要求理解全部架构；
+- [x] 英文README能解释项目和快速开始；
+- [x] 所有链接有效；
+- [x] 所有Schema示例通过；
+- [x] 所有验证脚本通过；
+- [x] Compatibility声明真实；
+- [x] MIT License存在。
 
 ## 18. 建议提交顺序
 
@@ -956,15 +956,15 @@ runtimes:
 10. docs: finalize bilingual guides and release checklist
 ```
 
-## 19. 正式建仓库前仍需确认
+## 19. 建仓库决策记录
 
-1. GitHub仓库创建在哪个账号或组织；
-2. 仓库初始可见性：Public还是Private；
-3. 是否先本地完成并敏感扫描通过后再推Public；
-4. 是否使用`main`作为默认分支；
-5. 首发版本是否定为`0.1.0`；
-6. 是否需要启用Issues、Discussions和Wiki；
-7. 是否需要CI自动执行Schema、验证器和敏感扫描。
+1. GitHub仓库：`JOJONKU-tech/prd-agent-kit`；
+2. 可见性：Private；
+3. 发布方式：Private环境完成并通过敏感扫描；如需转Public，必须再次执行Release Checklist；
+4. 默认分支：`main`；
+5. 首发目标版本：`0.1.0`，尚未创建公开Tag/Release；
+6. Issues、Discussions和Wiki以GitHub当前仓库设置为准，不在文档中虚构状态；
+7. Phase 9启用CI自动执行Release Check和全量测试。
 
 ## 20. 参考来源
 

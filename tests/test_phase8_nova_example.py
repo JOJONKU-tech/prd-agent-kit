@@ -198,7 +198,7 @@ class Phase8NovaExampleTests(unittest.TestCase):
         ]
         extra = os.environ.get("PRD_AGENT_KIT_EXTRA_FORBIDDEN_TERMS", "")
         forbidden.extend(term.strip() for term in extra.split(",") if term.strip())
-        home_path = re.compile(r"/Users/[^/\s]+")
+        home_path = re.compile(r"/(?:Users|home)/[^/\s]+")
         hits = []
         for path in EXAMPLE.rglob("*"):
             if not path.is_file() or path.suffix in {".png", ".docx"}:
