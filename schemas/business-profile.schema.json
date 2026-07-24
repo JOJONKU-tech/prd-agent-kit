@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prd-agent-kit.dev/schemas/business-profile.schema.json",
+  "title": "Business Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "domain", "scope", "roles", "systems", "terms", "metrics", "rules", "open_questions"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "name"],
+      "properties": {
+        "slug": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "name": {"type": "string", "minLength": 1}
+      }
+    },
+    "scope": {"$ref": "#/$defs/sourcedStatement"},
+    "roles": {"type": "array", "items": {"$ref": "#/$defs/namedItem"}},
+    "main_process": {"type": "array", "items": {"$ref": "#/$defs/sourcedStatement"}},
+    "systems": {"type": "array", "items": {"$ref": "#/$defs/namedItem"}},
+    "terms": {"type": "array", "items": {"$ref": "#/$defs/namedItem"}},
+    "metrics": {"type": "array", "items": {"$ref": "#/$defs/namedItem"}},
+    "rules": {"type": "array", "items": {"$ref": "#/$defs/rule"}},
+    "open_questions": {"type": "array", "items": {"$ref": "#/$defs/openQuestion"}}
+  },
+  "$defs": {
+    "status": {"enum": ["confirmed", "provisional", "unknown", "deprecated"]},
+    "sourceRefs": {"type": "array", "items": {"type": "string", "pattern": "^SRC-[A-Za-z0-9._-]+$"}, "uniqueItems": true},
+    "sourcedStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "summary", "source_refs"],
+      "properties": {
+        "status": {"$ref": "#/$defs/status"},
+        "summary": {"type": "string", "minLength": 1},
+        "source_refs": {"$ref": "#/$defs/sourceRefs"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"const": "confirmed"}}, "required": ["status"]},
+          "then": {"properties": {"source_refs": {"minItems": 1}}}
+        }
+      ]
+    },
+    "namedItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "status", "description", "source_refs"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "status": {"$ref": "#/$defs/status"},
+        "description": {"type": "string"},
+        "source_refs": {"$ref": "#/$defs/sourceRefs"}
+      }
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "kind", "status", "statement", "source_refs"],
+      "properties": {
+        "rule_id": {"type": "string", "pattern": "^RULE-[A-Za-z0-9._-]+$"},
+        "kind": {
+          "enum": ["field_source", "default_value", "permission", "metric_formula", "validation", "data_migration", "system_boundary", "process", "display", "interaction", "other"]
+        },
+        "status": {"$ref": "#/$defs/status"},
+        "statement": {"type": "string", "minLength": 1},
+        "source_refs": {"$ref": "#/$defs/sourceRefs"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {"const": "confirmed"},
+              "kind": {"enum": ["field_source", "default_value", "permission", "metric_formula", "validation", "data_migration", "system_boundary"]}
+            },
+            "required": ["status", "kind"]
+          },
+          "then": {"properties": {"source_refs": {"minItems": 1}}}
+        }
+      ]
+    },
+    "openQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question_id", "question", "blocking", "status"],
+      "properties": {
+        "question_id": {"type": "string", "pattern": "^Q-[A-Za-z0-9._-]+$"},
+        "question": {"type": "string", "minLength": 1},
+        "blocking": {"type": "boolean"},
+        "status": {"enum": ["open", "resolved"]},
+        "answer": {"type": ["string", "null"]},
+        "source_refs": {"$ref": "#/$defs/sourceRefs"}
+      }
+    }
+  }
+}

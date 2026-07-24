@@ -55,6 +55,17 @@ Agent的第一步应该是读取你提供的业务资料，而不是发一张二
 - [Agent入口](AGENTS.md)
 - [兼容状态](compatibility.yaml)
 
+## 开发验证
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements-dev.txt
+.venv/bin/python -m unittest discover -s tests -v
+.venv/bin/python validators/validate_router.py \
+  templates/knowledge-base/_meta/router.yaml \
+  --kb-root templates/knowledge-base
+```
+
 ## LLM Wiki来源
 
 本项目借鉴Andrej Karpathy的LLM Wiki模式，只链接原始来源，不复制正文：

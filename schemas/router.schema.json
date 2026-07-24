@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prd-agent-kit.dev/schemas/router.schema.json",
+  "title": "PRD Knowledge Router",
+  "oneOf": [
+    {"$ref": "#/$defs/rootRouter"},
+    {"$ref": "#/$defs/domainRouter"}
+  ],
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route_id", "match", "read"],
+      "properties": {
+        "route_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+        "match": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["keywords"],
+          "properties": {
+            "keywords": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+            "request_types": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+            "source_types": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+          }
+        },
+        "read": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required", "optional"],
+          "properties": {
+            "required": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/relativePath"}, "uniqueItems": true},
+            "optional": {"type": "array", "items": {"$ref": "#/$defs/relativePath"}, "uniqueItems": true}
+          }
+        },
+        "rationale": {"type": "string"}
+      }
+    },
+    "domainEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "name", "path", "keywords"],
+      "properties": {
+        "slug": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "name": {"type": "string", "minLength": 1},
+        "path": {"$ref": "#/$defs/relativePath"},
+        "description": {"type": "string"},
+        "aliases": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "keywords": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      }
+    },
+    "rootRouter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "router_type", "default_domain", "domains", "shared"],
+      "properties": {
+        "schema_version": {"const": "1.0"},
+        "router_type": {"const": "root"},
+        "default_domain": {"type": ["string", "null"]},
+        "domains": {"type": "array", "items": {"$ref": "#/$defs/domainEntry"}},
+        "shared": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["always_read", "routes"],
+          "properties": {
+            "always_read": {"type": "array", "maxItems": 3, "items": {"$ref": "#/$defs/relativePath"}, "uniqueItems": true},
+            "routes": {"type": "array", "items": {"$ref": "#/$defs/route"}}
+          }
+        }
+      }
+    },
+    "domainRouter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "router_type", "domain", "always_read", "routes", "excluded_by_default"],
+      "properties": {
+        "schema_version": {"const": "1.0"},
+        "router_type": {"const": "domain"},
+        "domain": {"type": "string", "minLength": 1},
+        "always_read": {"type": "array", "maxItems": 3, "items": {"$ref": "#/$defs/relativePath"}, "uniqueItems": true},
+        "routes": {"type": "array", "items": {"$ref": "#/$defs/route"}},
+        "excluded_by_default": {"type": "array", "items": {"$ref": "#/$defs/relativePath"}, "uniqueItems": true}
+      }
+    }
+  }
+}

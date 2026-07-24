@@ -1,4 +1,5 @@
 schema_version: "1.0"
+router_type: root
 default_domain: null
 domains: []
 shared:

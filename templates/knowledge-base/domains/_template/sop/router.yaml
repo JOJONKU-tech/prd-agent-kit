@@ -1,5 +1,6 @@
 schema_version: "1.0"
-domain: ""
+router_type: domain
+domain: domain-slug
 always_read:
   - business/overview.md
 routes: []

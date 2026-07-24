@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prd-agent-kit.dev/schemas/source-manifest.schema.json",
+  "title": "PRD Knowledge Source Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_mode", "sources", "conflicts"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "source_mode": {"enum": ["reference", "copy"]},
+    "sources": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/source"}
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/conflict"}
+    }
+  },
+  "$defs": {
+    "sourceRef": {
+      "type": "string",
+      "pattern": "^SRC-[A-Za-z0-9._-]+$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "type", "title", "status", "location"],
+      "properties": {
+        "source_id": {"$ref": "#/$defs/sourceRef"},
+        "type": {
+          "enum": [
+            "business_overview",
+            "system_document",
+            "terminology",
+            "metric_definition",
+            "meeting_record",
+            "mrd",
+            "prd_sample",
+            "prd_template",
+            "image_asset",
+            "other"
+          ]
+        },
+        "title": {"type": "string", "minLength": 1},
+        "status": {"enum": ["confirmed", "provisional", "unknown", "deprecated", "unreadable"]},
+        "location": {"type": "string", "minLength": 1},
+        "sha256": {"type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$"},
+        "captured_at": {"type": ["string", "null"], "format": "date-time"},
+        "source_updated_at": {"type": ["string", "null"], "format": "date-time"},
+        "domains": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "notes": {"type": ["string", "null"]}
+      }
+    },
+    "conflictCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "source_id"],
+      "properties": {
+        "value": {},
+        "source_id": {"$ref": "#/$defs/sourceRef"},
+        "source_priority": {"type": ["string", "null"]}
+      }
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["conflict_id", "topic", "candidates", "resolution"],
+      "properties": {
+        "conflict_id": {"type": "string", "pattern": "^CONFLICT-[A-Za-z0-9._-]+$"},
+        "topic": {"type": "string", "minLength": 1},
+        "candidates": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/conflictCandidate"}},
+        "resolution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "selected_value", "confirmed_by", "confirmed_at"],
+          "properties": {
+            "status": {"enum": ["open", "resolved"]},
+            "selected_value": {},
+            "confirmed_by": {"type": ["string", "null"]},
+            "confirmed_at": {"type": ["string", "null"], "format": "date-time"}
+          }
+        }
+      }
+    }
+  }
+}
