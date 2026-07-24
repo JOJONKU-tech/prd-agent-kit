@@ -1,0 +1,6 @@
+schema_version: "1.0"
+default_domain: null
+domains: []
+shared:
+  always_read: []
+  routes: []

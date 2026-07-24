@@ -6,7 +6,7 @@
 
 ## 当前状态
 
-- 版本阶段：`0.1.0`设计与骨架阶段
+- 版本阶段：`0.1.0`协议实现阶段
 - 仓库状态：Private development
 - License：MIT
 - Claude Code / Codex / Hermes：Designed，尚未完成真实E2E验证
