@@ -33,6 +33,7 @@ Local operational summaries are available at:
 - `references/template-learning.md`
 - `references/prd-ir.md`
 - `references/rendering.md`
+- `references/publishing.md`
 
 ## Workflow
 

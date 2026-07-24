@@ -1,0 +1,57 @@
+schema_version: "1.0"
+publish_id: PUB-DEMO-001
+status: awaiting_confirmation
+input:
+  prd_ir: fixtures/nested-logic/prd-ir.yaml
+  prd_ir_sha256: e3d3dc32ce160450b0bf99808b39d9cb2e58c7d8f61fb4a82c4a6aece9694527
+  render_manifest: fixtures/nested-logic/render-manifest.yaml
+  render_manifest_sha256: 5cb5e624b0c80398d019f3ee91a145e4fe2e1f8007b51ae5aa59b5cd2f3013bf
+adapter:
+  adapter_ref: examples/document-adapters/feishu.yaml
+  adapter_version: "1.0"
+  verification_status: structure_verified
+operation:
+  requested: create
+  executed: create
+  fallback_reason: null
+target:
+  platform: feishu
+  space_id: example-space
+  parent_id: example-folder
+  document_id: null
+  title: Demo PRD
+renderer:
+  type: feishu_blocks
+  output_ref: fixtures/nested-logic/block-plan.yaml
+assets:
+  upload_plan_ref: null
+  count: 0
+compatibility:
+  required:
+    heading_hierarchy: supported
+  preferred:
+    native_ordered_lists: supported
+    requirements_table: unsupported
+degradations:
+  - feature: requirements_table
+    reason: Native nested lists cannot be preserved inside table cells.
+    action: Use requirement cards while preserving ordered-list blocks.
+    severity: preferred
+verification:
+  strategies:
+    - mcp_structure
+    - browser
+  minimum_passes: 1
+side_effects:
+  create_documents: 1
+  update_documents: 0
+  upload_assets: 0
+  delete_documents: 0
+idempotency:
+  key: PUB-DEMO-001
+  strategy: query_before_retry
+confirmation:
+  required: true
+  status: pending
+  plan_sha256: null
+  confirmed_at: null

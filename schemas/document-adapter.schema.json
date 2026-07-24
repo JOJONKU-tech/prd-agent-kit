@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prd-agent-kit.dev/schemas/document-adapter.schema.json",
+  "title": "Generic Document MCP Adapter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "adapter_id", "display_name", "transport", "strategy", "verification_status", "mcp", "capabilities", "sandbox"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "adapter_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "display_name": {"type": "string", "minLength": 1},
+    "transport": {"const": "mcp"},
+    "strategy": {"enum": ["block_native", "file_import", "hybrid"]},
+    "verification_status": {"$ref": "#/$defs/verificationStatus"},
+    "mcp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["server_name"],
+      "properties": {"server_name": {"type": "string", "minLength": 1}}
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "health_check": {"$ref": "#/$defs/mapping"},
+        "list_targets": {"$ref": "#/$defs/mapping"},
+        "search_documents": {"$ref": "#/$defs/mapping"},
+        "read_document": {"$ref": "#/$defs/mapping"},
+        "inspect_structure": {"$ref": "#/$defs/mapping"},
+        "create_document": {"$ref": "#/$defs/mapping"},
+        "update_document": {"$ref": "#/$defs/mapping"},
+        "import_document": {"$ref": "#/$defs/mapping"},
+        "upload_asset": {"$ref": "#/$defs/mapping"},
+        "get_operation_status": {"$ref": "#/$defs/mapping"},
+        "resolve_document_url": {"$ref": "#/$defs/mapping"},
+        "export_document": {"$ref": "#/$defs/mapping"}
+      },
+      "minProperties": 1
+    },
+    "sandbox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_id", "test_document_id", "fixture_version", "last_verified_at"],
+      "properties": {
+        "target_id": {"type": ["string", "null"]},
+        "test_document_id": {"type": ["string", "null"]},
+        "fixture_version": {"type": "string", "minLength": 1},
+        "last_verified_at": {"type": ["string", "null"], "format": "date-time"}
+      }
+    }
+  },
+  "$defs": {
+    "verificationStatus": {"enum": ["discovered", "mapped", "read_verified", "write_verified", "structure_verified", "broken"]},
+    "fieldMap": {"type": "object", "propertyNames": {"pattern": "^[a-zA-Z][a-zA-Z0-9._-]*$"}, "additionalProperties": {"type": "string", "minLength": 1}},
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "status"],
+      "properties": {
+        "tool": {"type": "string", "minLength": 1},
+        "arguments": {"$ref": "#/$defs/fieldMap"},
+        "outputs": {"$ref": "#/$defs/fieldMap"},
+        "status": {"$ref": "#/$defs/verificationStatus"}
+      }
+    }
+  }
+}

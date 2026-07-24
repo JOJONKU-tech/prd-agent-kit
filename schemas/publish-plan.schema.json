@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prd-agent-kit.dev/schemas/publish-plan.schema.json",
+  "title": "Document Publish Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "publish_id", "status", "input", "adapter", "operation", "target", "renderer", "assets", "compatibility", "degradations", "verification", "side_effects", "idempotency", "confirmation"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "publish_id": {"type": "string", "pattern": "^PUB-[A-Za-z0-9._-]+$"},
+    "status": {"enum": ["planning", "awaiting_confirmation", "publishing", "partial", "published_unverified", "published_verified", "failed"]},
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prd_ir", "prd_ir_sha256", "render_manifest", "render_manifest_sha256"],
+      "properties": {
+        "prd_ir": {"type": "string", "minLength": 1},
+        "prd_ir_sha256": {"$ref": "#/$defs/sha256"},
+        "render_manifest": {"type": "string", "minLength": 1},
+        "render_manifest_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter_ref", "adapter_version", "verification_status"],
+      "properties": {
+        "adapter_ref": {"type": "string", "minLength": 1},
+        "adapter_version": {"type": "string", "minLength": 1},
+        "verification_status": {"enum": ["write_verified", "structure_verified"]}
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "executed", "fallback_reason"],
+      "properties": {
+        "requested": {"enum": ["create", "update"]},
+        "executed": {"enum": ["create", "update", "create_new_version"]},
+        "fallback_reason": {"type": ["string", "null"]}
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "space_id", "parent_id", "document_id", "title"],
+      "properties": {
+        "platform": {"type": "string", "minLength": 1},
+        "space_id": {"type": ["string", "null"]},
+        "parent_id": {"type": ["string", "null"]},
+        "document_id": {"type": ["string", "null"]},
+        "title": {"type": "string", "minLength": 1}
+      }
+    },
+    "renderer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "output_ref"],
+      "properties": {
+        "type": {"enum": ["markdown", "docx", "feishu_blocks"]},
+        "output_ref": {"type": "string", "minLength": 1}
+      }
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["upload_plan_ref", "count"],
+      "properties": {
+        "upload_plan_ref": {"type": ["string", "null"]},
+        "count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "preferred"],
+      "properties": {
+        "required": {"$ref": "#/$defs/capabilityMap"},
+        "preferred": {"$ref": "#/$defs/capabilityMap"}
+      }
+    },
+    "degradations": {"type": "array", "items": {"$ref": "#/$defs/degradation"}},
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategies", "minimum_passes"],
+      "properties": {
+        "strategies": {"type": "array", "minItems": 1, "items": {"enum": ["mcp_structure", "browser", "user_confirmation"]}, "uniqueItems": true},
+        "minimum_passes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "side_effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["create_documents", "update_documents", "upload_assets", "delete_documents"],
+      "properties": {
+        "create_documents": {"type": "integer", "minimum": 0},
+        "update_documents": {"type": "integer", "minimum": 0},
+        "upload_assets": {"type": "integer", "minimum": 0},
+        "delete_documents": {"const": 0}
+      }
+    },
+    "idempotency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "strategy"],
+      "properties": {
+        "key": {"type": "string", "minLength": 1},
+        "strategy": {"const": "query_before_retry"}
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "status", "plan_sha256", "confirmed_at"],
+      "properties": {
+        "required": {"const": true},
+        "status": {"enum": ["pending", "confirmed", "rejected"]},
+        "plan_sha256": {"type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$"},
+        "confirmed_at": {"type": ["string", "null"], "format": "date-time"}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+    "capabilityMap": {"type": "object", "propertyNames": {"pattern": "^[a-z][a-z0-9._-]*$"}, "additionalProperties": {"enum": ["supported", "unsupported", "unavailable", "unknown"]}},
+    "degradation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["feature", "reason", "action", "severity"],
+      "properties": {
+        "feature": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "action": {"type": "string", "minLength": 1},
+        "severity": {"enum": ["preferred", "expected"]}
+      }
+    }
+  }
+}

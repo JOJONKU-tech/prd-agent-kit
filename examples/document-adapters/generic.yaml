@@ -1,0 +1,70 @@
+schema_version: "1.0"
+adapter_id: generic-file-import-example
+display_name: Generic Document File Import Example
+transport: mcp
+strategy: file_import
+verification_status: structure_verified
+mcp:
+  server_name: example-document-server
+capabilities:
+  health_check:
+    tool: example_health_check
+    status: read_verified
+  list_targets:
+    tool: example_list_targets
+    arguments:
+      parent_id: parent_id
+    outputs:
+      items: data.items
+    status: read_verified
+  read_document:
+    tool: example_read_document
+    arguments:
+      document_id: document_id
+    outputs:
+      content: data.content
+    status: read_verified
+  inspect_structure:
+    tool: example_inspect_structure
+    arguments:
+      document_id: document_id
+    outputs:
+      blocks: data.blocks
+    status: structure_verified
+  import_document:
+    tool: example_import_document
+    arguments:
+      file_url: file_url
+      title: title
+      parent_id: parent_id
+    outputs:
+      operation_id: data.operation_id
+      document_id: data.document_id
+    status: write_verified
+  upload_asset:
+    tool: example_upload_asset
+    arguments:
+      file_path: file_path
+    outputs:
+      file_url: data.file_url
+    status: write_verified
+  get_operation_status:
+    tool: example_get_operation_status
+    arguments:
+      operation_id: operation_id
+    outputs:
+      status: data.status
+      document_id: data.document_id
+    status: read_verified
+  resolve_document_url:
+    tool: example_resolve_document_url
+    arguments:
+      document_id: document_id
+    outputs:
+      url: data.url
+    status: read_verified
+sandbox:
+  target_id: sandbox-folder-example
+  test_document_id: sandbox-document-example
+  fixture_version: "1.0"
+  last_verified_at: "2026-07-24T10:00:00Z"

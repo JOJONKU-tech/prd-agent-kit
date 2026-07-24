@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prd-agent-kit.dev/schemas/publication-receipt.schema.json",
+  "title": "Document Publication Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "publish_id", "status", "operation", "document", "input", "verification", "created_at", "verified_at"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "publish_id": {"type": "string", "pattern": "^PUB-[A-Za-z0-9._-]+$"},
+    "status": {"enum": ["partial", "published_unverified", "published_verified", "failed"]},
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "executed", "reason"],
+      "properties": {
+        "requested": {"enum": ["create", "update"]},
+        "executed": {"enum": ["create", "update", "create_new_version"]},
+        "reason": {"type": ["string", "null"]}
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "url"],
+      "properties": {
+        "id": {"type": ["string", "null"]},
+        "title": {"type": "string", "minLength": 1},
+        "url": {"type": ["string", "null"]}
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prd_ir_sha256", "render_manifest_sha256", "publish_plan_sha256"],
+      "properties": {
+        "prd_ir_sha256": {"$ref": "#/$defs/sha256"},
+        "render_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "publish_plan_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategy", "result", "checked"],
+      "properties": {
+        "strategy": {"enum": ["mcp_structure", "browser", "user_confirmation", "none"]},
+        "result": {"enum": ["passed", "failed", "not_run"]},
+        "checked": {"type": "object", "additionalProperties": {"enum": ["passed", "failed", "not_run", "unavailable"]}}
+      }
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "verified_at": {"type": ["string", "null"], "format": "date-time"},
+    "errors": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {"sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"}}
+}

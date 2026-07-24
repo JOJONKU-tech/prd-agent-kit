@@ -1,0 +1,76 @@
+schema_version: "1.0"
+adapter_id: feishu-block-native-example
+display_name: Feishu Native Block Example
+transport: mcp
+strategy: block_native
+verification_status: structure_verified
+mcp:
+  server_name: example-feishu-docs
+capabilities:
+  health_check:
+    tool: feishu_docs_health_check
+    status: read_verified
+  list_targets:
+    tool: feishu_docs_list_folders
+    arguments:
+      parent_id: folder_id
+    outputs:
+      items: data.items
+    status: read_verified
+  read_document:
+    tool: feishu_docs_read_document
+    arguments:
+      document_id: document_id
+    outputs:
+      content: data.content
+    status: read_verified
+  inspect_structure:
+    tool: feishu_docs_list_blocks
+    arguments:
+      document_id: document_id
+    outputs:
+      blocks: data.items
+    status: structure_verified
+  create_document:
+    tool: feishu_docs_create_document
+    arguments:
+      title: title
+      parent_id: folder_id
+    outputs:
+      document_id: data.document_id
+      url: data.url
+    status: write_verified
+  update_document:
+    tool: feishu_docs_apply_block_plan
+    arguments:
+      document_id: document_id
+      block_plan: blocks
+    outputs:
+      operation_id: data.operation_id
+    status: write_verified
+  upload_asset:
+    tool: feishu_docs_upload_image
+    arguments:
+      file_path: file_path
+    outputs:
+      file_id: data.file_id
+    status: write_verified
+  get_operation_status:
+    tool: feishu_docs_get_operation_status
+    arguments:
+      operation_id: operation_id
+    outputs:
+      status: data.status
+    status: read_verified
+  resolve_document_url:
+    tool: feishu_docs_resolve_url
+    arguments:
+      document_id: document_id
+    outputs:
+      url: data.url
+    status: read_verified
+sandbox:
+  target_id: sandbox-folder-example
+  test_document_id: sandbox-document-example
+  fixture_version: "1.0"
+  last_verified_at: "2026-07-24T10:00:00Z"

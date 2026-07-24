@@ -1,0 +1,26 @@
+schema_version: "1.0"
+publish_id: PUB-DEMO-001
+status: published_verified
+operation:
+  requested: create
+  executed: create
+  reason: null
+document:
+  id: example-document-001
+  title: Demo PRD
+  url: https://docs.example.test/doc/example-document-001
+input:
+  prd_ir_sha256: e3d3dc32ce160450b0bf99808b39d9cb2e58c7d8f61fb4a82c4a6aece9694527
+  render_manifest_sha256: 5cb5e624b0c80398d019f3ee91a145e4fe2e1f8007b51ae5aa59b5cd2f3013bf
+  publish_plan_sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+verification:
+  strategy: mcp_structure
+  result: passed
+  checked:
+    headings: passed
+    requirements: passed
+    lists: passed
+    assets: passed
+created_at: "2026-07-24T10:00:00Z"
+verified_at: "2026-07-24T10:01:00Z"
+errors: []
